@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_course_progresses",
+  "info": {
+    "singularName": "user-course-progress",
+    "pluralName": "user-course-progresses",
+    "displayName": "User Course Progress"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "userId": {
+      "type": "string",
+      "required": true
+    },
+    "courseId": {
+      "type": "string",
+      "required": true
+    },
+    "completedLessonIds": {
+      "type": "json"
+    },
+    "lastAccessedLessonId": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "kind": "collectionType",
+  "collectionName": "blog_posts",
+  "info": {
+    "singularName": "blog-post",
+    "pluralName": "blog-posts",
+    "displayName": "Blog Post"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "excerpt": {
+      "type": "text"
+    },
+    "content": {
+      "type": "text"
+    },
+    "coverImage": {
+      "type": "string"
+    },
+    "authorId": {
+      "type": "string"
+    },
+    "authorName": {
+      "type": "string"
+    },
+    "authorRole": {
+      "type": "enumeration",
+      "enum": [
+        "Admin",
+        "Content Manager",
+        "Instructor",
+        "Student"
+      ]
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "Draft",
+        "Published"
+      ],
+      "default": "Draft"
+    },
+    "publishedAt": {
+      "type": "datetime"
+    },
+    "tags": {
+      "type": "json"
+    }
+  }
+}

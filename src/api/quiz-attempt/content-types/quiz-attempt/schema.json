@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "quiz_attempts",
+  "info": {
+    "singularName": "quiz-attempt",
+    "pluralName": "quiz-attempts",
+    "displayName": "Quiz Attempt"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "quizId": {
+      "type": "string",
+      "required": true
+    },
+    "studentId": {
+      "type": "string",
+      "required": true
+    },
+    "scorePercentage": {
+      "type": "integer"
+    },
+    "passed": {
+      "type": "boolean"
+    },
+    "answers": {
+      "type": "json"
+    },
+    "completedAt": {
+      "type": "datetime"
+    }
+  }
+}
