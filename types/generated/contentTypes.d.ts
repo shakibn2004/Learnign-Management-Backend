@@ -684,6 +684,7 @@ export interface ApiLmsUserLmsUser extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     name: Schema.Attribute.String & Schema.Attribute.Required;
+    password: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     role: Schema.Attribute.Enumeration<
       ['Admin', 'Content Manager', 'Instructor', 'Student']
