@@ -367,7 +367,7 @@ async function seedLMSApp() {
     'blog-post': ['find', 'findOne', 'create', 'update', 'delete'],
     'quiz-attempt': ['find', 'findOne', 'create', 'update', 'delete'],
     'user-course-progress': ['find', 'findOne', 'create', 'update', 'delete'],
-    'lms-user': ['find', 'findOne', 'create', 'update', 'delete'],
+    'lms-user': ['find', 'findOne', 'create', 'update', 'delete', 'login', 'register', 'me'],
   });
 
   // Clear existing tables
@@ -394,6 +394,9 @@ async function seedLMSApp() {
     await strapi.db.query('api::user-course-progress.user-course-progress').deleteMany({ where: {} });
   } catch(e) {}
 
+  const bcrypt = require('bcryptjs');
+  const defaultPasswordHash = await bcrypt.hash('password123', 10);
+
   // 1. Seed users
   console.log('Seeding LMS Users...');
   for (const u of INITIAL_USERS) {
@@ -402,6 +405,7 @@ async function seedLMSApp() {
         documentId: u.id,
         name: u.name,
         email: u.email,
+        password: defaultPasswordHash,
         role: u.role,
         avatar: u.avatar,
         enrolledCourseIds: u.enrolledCourseIds,

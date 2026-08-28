@@ -1,10 +1,43 @@
 import type { Core } from '@strapi/strapi';
+import jwt from 'jsonwebtoken';
+
+const JWT_SECRET = process.env.JWT_SECRET || 'learnhub_jwt_super_secret_key_2026';
 
 export default (config: any, { strapi }: { strapi: Core.Strapi }) => {
   return async (ctx: any, next: () => Promise<void>) => {
     // Only check API routes
     if (!ctx.path.startsWith('/api/')) {
       return next();
+    }
+
+    const path = ctx.path;
+    const method = ctx.method;
+
+    // Public authentication routes bypass auth-check
+    if (
+      path === '/api/lms-users/login' ||
+      path === '/api/lms-users/register' ||
+      path === '/api/lms-users/me'
+    ) {
+      return next();
+    }
+
+    // Try extracting role & id from JWT Bearer token if provided
+    if (ctx.headers.authorization && ctx.headers.authorization.startsWith('Bearer ')) {
+      try {
+        const token = ctx.headers.authorization.split(' ')[1];
+        const decoded: any = jwt.verify(token, JWT_SECRET);
+        if (decoded) {
+          if (!ctx.headers['x-user-role'] && decoded.role) {
+            ctx.headers['x-user-role'] = decoded.role;
+          }
+          if (!ctx.headers['x-user-id'] && decoded.id) {
+            ctx.headers['x-user-id'] = decoded.id;
+          }
+        }
+      } catch (e) {
+        // Continue with custom headers if token is missing/expired
+      }
     }
 
     const userRole = ctx.headers['x-user-role'];
@@ -24,9 +57,6 @@ export default (config: any, { strapi }: { strapi: Core.Strapi }) => {
     if (userRole === 'Admin') {
       return next(); // Admin has full access
     }
-
-    const method = ctx.method;
-    const path = ctx.path;
 
     // 1. LMS User management: Admin only (non-admins cannot modify or access other user data, except updating own profile)
     if (path.startsWith('/api/lms-users')) {

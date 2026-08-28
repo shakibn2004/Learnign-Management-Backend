@@ -35,6 +35,9 @@
     },
     "enrolledCourseIds": {
       "type": "json"
+    },
+    "password": {
+      "type": "string"
     }
   }
 }
