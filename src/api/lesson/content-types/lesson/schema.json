@@ -35,6 +35,9 @@
       "type": "integer",
       "default": 1
     },
+    "courseId": {
+      "type": "string"
+    },
     "course": {
       "type": "relation",
       "relation": "manyToOne",

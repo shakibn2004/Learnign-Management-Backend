@@ -635,6 +635,7 @@ export interface ApiLessonLesson extends Struct.CollectionTypeSchema {
   attributes: {
     content: Schema.Attribute.Text;
     course: Schema.Attribute.Relation<'manyToOne', 'api::course.course'>;
+    courseId: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
