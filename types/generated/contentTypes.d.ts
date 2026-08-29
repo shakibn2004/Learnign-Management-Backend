@@ -768,6 +768,7 @@ export interface ApiQuizQuiz extends Struct.CollectionTypeSchema {
   };
   attributes: {
     course: Schema.Attribute.Relation<'oneToOne', 'api::course.course'>;
+    courseId: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

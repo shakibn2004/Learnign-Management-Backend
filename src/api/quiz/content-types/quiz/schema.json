@@ -24,6 +24,9 @@
     "questions": {
       "type": "json"
     },
+    "courseId": {
+      "type": "string"
+    },
     "course": {
       "type": "relation",
       "relation": "oneToOne",
