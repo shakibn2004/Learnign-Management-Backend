@@ -10,6 +10,11 @@ export default (config: any, { strapi }: { strapi: Core.Strapi }) => {
       return next();
     }
 
+    // Always allow CORS preflight requests through
+    if (ctx.method === 'OPTIONS') {
+      return next();
+    }
+
     const path = ctx.path;
     const method = ctx.method;
 
